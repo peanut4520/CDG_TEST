@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<h:body>
+	<h:form id="myForm">
+
+		<h:panelGrid columns="2">
+			<h:commandButton value="testRequire"
+				action="#{bookController.testRequire()}"></h:commandButton>
+			<h:commandButton value="testRequiresNew"
+				action="#{bookController.testRequiresNew()}"></h:commandButton>
+
+			<h:commandButton value="testSupport"
+				action="#{bookController.testSupport()}" />
+			<h:commandButton value="testNotSupport"
+				action="#{bookController.testNotSupport()}" />
+
+			<h:commandButton value="testMadatory"
+				action="#{bookController.testMadatory()}" />
+			<h:commandButton value="testNever"
+				action="#{bookController.testNever()}" />
+
+			<h:commandButton value="testSupport2"
+				action="#{bookController.testSupport2()}" />
+		</h:panelGrid>
+
+
+	</h:form>
+</h:body>
+</html>
