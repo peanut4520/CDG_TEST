@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+<hibernate-reverse-engineering>
+	<type-mapping>
+		<sql-type jdbc-type="VARCHAR"
+			hibernate-type="java.lang.String" />
+		<sql-type jdbc-type="CHAR" hibernate-type="java.lang.String" />
+		<sql-type jdbc-type="TIMESTAMP"
+			hibernate-type="java.util.Date" />
+		<sql-type jdbc-type="DECIMAL" hibernate-type="java.lang.Long"
+			scale="0" />
+		<sql-type jdbc-type="INTEGER" hibernate-type="java.lang.Long" />
+		<sql-type jdbc-type="SMALLINT"
+			hibernate-type="java.lang.Long" />
+		<sql-type jdbc-type="TINYINT" hibernate-type="java.lang.Long" />
+	</type-mapping>
+
+	<table-filter match-name="country"></table-filter>
+	<table-filter match-name="city"></table-filter>
+	
+</hibernate-reverse-engineering>

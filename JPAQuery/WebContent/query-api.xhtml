@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<h:body>
+	<h:form style="margin-left:20%">
+		<h:panelGrid  columns="2">
+			<h:outputText value="country name" />
+			<h:inputText id="countryId" value="#{queryApiVM.countryName}"/>
+			
+			<h:outputText value="city name" />
+			<h:inputText id="cityId" value="#{queryApiVM.cityName}"/>
+			
+		</h:panelGrid>
+		<h:commandButton value="queryCountry" action="#{queryApiController.queryCountry()}"/>
+		<h:commandButton value="queryCountryByName" action="#{queryApiController.queryCountryByName()}"/>
+		<h:commandButton value="testJQPL" action="#{queryApiController.testJPQL()}"/>
+		<h:commandButton value="queryJoin" action="#{queryApiController.queryJoin()}"/>
+		<h:commandButton value="queryCountryJoinFetch" action="#{queryApiController.queryCountryJoinFetch()}"/>
+		<h:commandButton value="queryCityJoinFetch" action="#{queryApiController.queryCityJoinFetch()}"/>
+		<h:commandButton value="queryNativeSQL" action="#{queryApiController.queryNativeSQL()}"/>
+		<br /><br />
+		<h:dataTable border="1" var="country" value="#{queryApiController.countryList}">
+			<h:column>
+				<f:facet name="header">Country name</f:facet>
+				<h:outputText value="#{country.countryName}" />
+			</h:column>
+		</h:dataTable>
+		<br />
+		<h:dataTable border="1" var="city" value="#{queryApiController.cityList}">
+			<h:column>
+				<f:facet name="header">City name</f:facet>
+				<h:outputText value="#{city.cityName}" />
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+	
+</h:body>
+</html>

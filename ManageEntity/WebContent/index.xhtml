@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<h:message for="" />
+	<h:form style="margin-left:20%">
+		<h:panelGrid columns="2">
+			<h:outputText value="ID" />
+			<h:inputText id="bookId" value="#{bookVM.id}"></h:inputText>
+
+			<h:outputText value="Title" />
+			<h:inputText id="bookTitle" value="#{bookVM.title}"></h:inputText>
+
+			<h:outputText value="Author" />
+			<h:inputText id="bookAuthor" value="#{bookVM.author}"></h:inputText>
+
+			<h:outputText value="Publication Year" />
+			<h:inputText id="bookPublicationYear"
+				value="#{bookVM.publicationYear}"></h:inputText>
+
+			<h:outputText value="Unit price" />
+			<h:inputText id="bookUnitPrice" value="#{bookVM.unitPrice}"></h:inputText>
+
+		</h:panelGrid>
+		<h:commandButton action="#{bookContoller.insertBook()}"
+			value="insertBook" />
+		<h:commandButton action="#{bookContoller.updateBook()}"
+			value="updateBook" />
+		<h:commandButton action="#{bookContoller.findBookById()}"
+			value="findBook" />
+		<h:commandButton action="#{bookContoller.deleteBook()}"
+			value="deleteBook" />
+			<h:commandButton action="#{bookContoller.updateBookWithMerge()}"
+			value="mergeBook" />
+
+
+	</h:form>
+
+</body>
+</html>

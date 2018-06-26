@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<h:body>
+	<h:form style="margin-left:20%">
+		<h:panelGrid columns="2">
+			<h:outputText value="country ID" />
+			<h:inputText id="countryId" value="#{relationVM.countryId}" />
+
+			<h:outputText value="city ID" />
+			<h:inputText id="cityId" value="#{relationVM.cityId}" />
+
+		</h:panelGrid>
+		
+
+		<h:commandButton value="findCouryById"
+			action="#{relationController.findCountry()}" />
+		<h:commandButton value="findCityById"
+			action="#{relationController.findCity()}" />
+		<br />
+		
+		<h:outputText
+			value="#{relationVM.cityName} city of #{relationVM.countryName}"
+			rendered="#{not empty relationVM.cityName}" />
+		<br />
+		<h:outputText value="#{relationVM.countryName}"
+			rendered="#{not empty relationVM.countryName}" />
+		<br />
+		<h:dataTable border="1" var="city"
+			value="#{relationController.cityList}">
+			<h:column>
+				<f:facet name="header">city name</f:facet>
+				<h:outputText value="#{city.cityName}" />
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+
+</h:body>
+</html>
