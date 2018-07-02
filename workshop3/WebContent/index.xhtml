@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<h:body> 
+
+<h:form id="myForm">
+	
+	<div align="center">
+		<h:panelGrid columns="4">
+			
+			<h:outputText value="Department" />
+			<h:selectOneMenu id="departmentCode" value="#{employeeVM.departmentCode}" >
+				<f:selectItem itemLabel="" itemValue=""  />
+				<f:selectItems var="dept" value="#{indexController.departmentBeans}" 
+				itemValue="#{dept.departmentCode}" itemLabel="#{dept.departmentName}">
+				</f:selectItems>
+				
+			</h:selectOneMenu>
+			<h:outputText value="Job title" />
+			<h:selectOneMenu id="jobTitleCode" value="#{employeeVM.jobTitleCode}">
+				<f:selectItem itemLabel="" itemValue=""  />
+				<f:selectItems var="job" value="#{indexController.jobTitleBeans}" 
+				itemValue="#{job.jobTitleCode}" itemLabel="#{job.jobTitleName}">
+				</f:selectItems>
+			</h:selectOneMenu>
+			
+			<h:outputText value="Job type" />
+			<h:selectOneRadio id="jobType" value="#{employeeVM.jobType}">
+				<f:selectItem itemLabel="Manage" itemValue="M"/>
+				<f:selectItem itemLabel="Operate" itemValue="O"/>
+			</h:selectOneRadio>
+			<h:outputText value="" />
+			<h:outputText value="" />
+			
+			<h:outputText value="First name" />
+			<h:inputText id="firstName" value="#{employeeVM.firstName}" maxlength="50" >
+			</h:inputText>
+			<h:outputText value="Last  name" />
+			<h:inputText id="lastName" value="#{employeeVM.lastName}" maxlength="50"></h:inputText>
+			
+			<h:outputText value="Gender" />
+			<h:selectOneRadio id="gender" value="#{employeeVM.gender}">
+				<f:selectItem itemLabel="Male" itemValue="M"/>
+				<f:selectItem itemLabel="Female" itemValue="F"/>
+				<f:ajax execute="@form" listener="#{indexController.search()}" render="employeeTable"/>
+				
+			</h:selectOneRadio>
+			<h:outputText value="" />
+			<h:outputText value="" />
+			
+		</h:panelGrid>
+		
+		<h:panelGrid columns="2">
+			
+			<h:commandButton id="searchBtn" action="#{indexController.search()}" value="Search">
+				<f:ajax execute="@form" render="employeeTable"></f:ajax>			
+			</h:commandButton>
+			<h:commandButton id="clearBtn" action="#{indexController.clear()}" value="Clear" >
+				<f:ajax execute="@form" render="@form"></f:ajax>			
+			</h:commandButton>
+			
+		</h:panelGrid>
+		
+		<div align="center" style="width:600px;">
+			
+			<div align="right">
+				<h:commandButton id="addBtn" action="#{indexController.gotoEditModeAdd()}" value="Add" />
+			</div>
+			
+			<h:panelGroup>
+				<h:dataTable id="employeeTable" var="emp" value="#{indexController.employeeBeans}"
+				border="1" style="border-color : gray">
+				
+					<h:column>
+						<div align="center" style="width:150px;">
+							<f:facet name="header">Department</f:facet>
+						</div>
+						<h:outputText id="departmentName" value="#{emp.departmentBean.departmentName}" />
+					</h:column>
+				
+					<h:column>
+						<div align="center" style="width:150px;">
+							<f:facet name="header">Job title</f:facet>
+						</div>
+						<h:outputText id="jobTitleName" value="#{emp.jobTitleBean.jobTitleName}" />
+					</h:column>
+				
+					<h:column>
+						<div align="center" style="width:100px;">
+							<f:facet name="header">Job type</f:facet>
+						</div>
+						<h:outputText id="jobType" value="#{emp.jobTitleBean.jobTypeDesc}" />
+					</h:column>
+				
+					<h:column>
+						<div align="center" style="width:200px;">
+							<f:facet name="header">Name</f:facet>
+						</div>
+						<h:outputText id="name" value="#{emp.title} #{emp.firstName} #{emp.lastName}" />
+					</h:column>
+				
+					<h:column>
+						<div align="center" style="width:80px;">
+							<f:facet name="header">Gender</f:facet>
+						</div>
+						<h:outputText id="gender" value="#{emp.genderDisplay}" />
+					</h:column>
+				
+					<h:column>
+						<div align="center" style="width:50px;">
+							<f:facet name="header">Edit</f:facet>
+						</div>
+					<h:commandButton id="editBtn" action="#{indexController.gotoEditModeEdit(emp)}" value="Edit" />
+					</h:column>
+				
+					<h:column>
+						<div align="center" style="width:50px;">
+							<f:facet name="header">Remove</f:facet>
+						</div>
+					<h:commandButton id="removeBtn" action="#{indexController.remove(emp)}" value="Remove"  >
+						<f:ajax execute="@form" render="@form"></f:ajax>			
+					</h:commandButton>
+					</h:column>
+				
+				</h:dataTable>
+			</h:panelGroup>
+		</div>
+
+	</div>
+	
+</h:form>
+
+</h:body> 
+</html>

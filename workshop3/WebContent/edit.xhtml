@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<h:body>
+
+	<h:form id="myForm">
+
+		<div align="center">
+			<h:panelGrid columns="3">
+
+				<h:outputText value="Department" />
+				<h:selectOneMenu id="departmentCode"
+					value="#{employeeEditVM.departmentCode}" required="true"
+					requiredMessage="please select Department">
+					<f:selectItem itemLabel="" itemValue="" />
+					<f:selectItems var="dept"
+						value="#{indexController.departmentBeans}"
+						itemValue="#{dept.departmentCode}"
+						itemLabel="#{dept.departmentName}"></f:selectItems>
+				</h:selectOneMenu>
+				<h:message for="departmentCode" style="color:red" />
+
+				<h:outputText value="Job title" />
+				<h:selectOneMenu id="jobTitleCode"
+					value="#{employeeEditVM.jobTitleCode}" required="true"
+					requiredMessage="please select Job title">
+					<f:selectItem itemLabel="" itemValue="" />
+					<f:selectItems var="job" value="#{indexController.jobTitleBeans}"
+						itemValue="#{job.jobTitleCode}" itemLabel="#{job.jobTitleName}"></f:selectItems>
+				</h:selectOneMenu>
+				<h:message for="jobTitleCode" style="color:red" />
+
+
+
+
+				<h:outputText value="Gender" />
+				<h:selectOneRadio id="gender" value="#{employeeEditVM.gender}"
+					required="true" requiredMessage="please select Gender">
+					<f:selectItem itemLabel="Male" itemValue="M" />
+					<f:ajax render="title" listener="#{editController.genarateTitleOption()}"/>
+					<f:selectItem itemLabel="Female" itemValue="F" />
+				</h:selectOneRadio>
+				<h:message for="gender" style="color:red" />
+
+				<h:outputText value="Title" />
+				<h:selectOneMenu id="title" value="#{employeeEditVM.title}"
+					required="true" requiredMessage="please select Title">
+					<f:selectItems value="#{editController.genders}"/>
+				</h:selectOneMenu>
+				<h:message for="title" style="color:red" />
+
+
+
+				<h:outputText value="First name" />
+				<h:inputText id="firstName" value="#{employeeEditVM.firstName}"
+					maxlength="50" required="true"
+					requiredMessage="please fill First name"></h:inputText>
+				<h:message for="firstName" style="color:red" />
+
+				<h:outputText value="Last  name" />
+				<h:inputText id="lastName" value="#{employeeEditVM.lastName}"
+					maxlength="50" required="true"
+					requiredMessage="please fill Last name"></h:inputText>
+				<h:message for="lastName" style="color:red" />
+
+				<h:outputText value="Address" />
+				<h:inputTextarea id="address" value="#{employeeEditVM.address}"
+					cols="50" rows="5" />
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="3">
+
+				<h:commandButton id="submitBtn" action="#{editController.submit()}"
+					value="Submit">
+					<f:ajax execute="@form" render="@form"></f:ajax>
+				</h:commandButton>
+				<h:commandButton id="clearBtn" action="#{editController.clear()}"
+					value="Clear">
+					<f:ajax execute="@form" render="@form"></f:ajax>
+				</h:commandButton>
+				<h:commandButton id="backBtn"
+					action="#{indexController.gotoIndex()}" value="Back"
+					immediate="true" />
+
+			</h:panelGrid>
+
+			<h:dataTable id="skillTable" var="skill"
+				value="#{editController.skillBeans}" border="1"
+				style="border-color : gray">
+
+				<h:column>
+					<div align="center" style="width: 150px;">
+						<f:facet name="header">Skill</f:facet>
+					</div>
+					<h:outputText id="skillName" value="#{skill.skillName}" />
+				</h:column>
+
+				<h:column>
+					<div align="center" style="width: 150px;">
+						<f:facet name="header">Description</f:facet>
+					</div>
+					<h:outputText id="skillDesc" value="#{skill.skillDesc}" />
+				</h:column>
+
+			</h:dataTable>
+		</div>
+
+
+	</h:form>
+
+</h:body>
+</html>
