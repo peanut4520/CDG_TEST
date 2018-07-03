@@ -1,0 +1,95 @@
+drop table trainexam.order_detail;
+drop table trainexam.order_master;
+drop table trainexam.product;
+drop table trainexam.customer;
+drop table trainexam.category;
+
+drop database trainexam;
+
+create database trainexam;
+
+create table trainexam.category (
+	category_code varchar(3) not null
+	, category_name varchar(50) not null
+	, primary key (category_code)
+);
+
+create table trainexam.product (
+	product_code varchar(5) not null
+	, product_name varchar(100) not null
+	, price int not null
+	, category_code varchar(3) not null
+	, detail varchar(500)
+	, primary key (product_code)
+	, foreign key (category_code) references category(category_code)
+);
+
+create table trainexam.customer (
+	customer_id varchar(5) not null
+	, first_name varchar(50) not null
+	, last_name varchar(50) not null
+	, address varchar(500) not null
+	, primary key (customer_id)
+);
+
+create table trainexam.order_master (
+	order_id varchar(5) not null
+	, customer_id varchar(5) not null
+	, order_date datetime not null
+	, total int not null
+	, amount int not null
+	, primary key (order_id)
+	, foreign key (customer_id) references customer(customer_id)
+);
+
+create table trainexam.order_detail (
+	order_detail_id varchar(10) not null
+	, order_id varchar(5) not null
+	, product_code varchar(5) not null
+	, product_amount int not null
+	, product_total int not null
+	, primary key (order_detail_id)
+	, foreign key (order_id) references order_master(order_id)
+	, foreign key (product_code) references product(product_code)
+);
+
+-- Category Data
+insert into trainexam.category values('001', 'Electronics');
+insert into trainexam.category values('002', 'Health');
+insert into trainexam.category values('003', 'Sport');
+insert into trainexam.category values('004', 'Home');
+
+-- Product Data
+insert into trainexam.product values('00101', 'Oppo R9s', 12000, '001', 'There are some good reasons to look past the Oppo R9s alarmingly Apple-ish design. First, this follow-up to the Oppo R9 has got killer battery life. Second, the front and rear 16-megapixel cameras are serious business.');
+insert into trainexam.product values('00102', 'Apple MacBook Air', 50000, '001', 'Retina technology never made its way into the display despite rumors dating back to 2013 suggesting it would. And, that goes without mentioning that it''s been over a year and a half since the last minor speed bump, which introduced the MacBook Air to Broadwell');
+insert into trainexam.product values('00103', 'Sandisk Memory Micro SD 32GB', 200, '001', 'The SanDisk microSDHC cards offer an easy, affordable way to expand your mobile device''s onboard memory. Available in capacities from 4GB to 32GB, these cards give you additional storage space for your favorite photos, and even HD videos.');
+insert into trainexam.product values('00104', 'GoPro Hero 5', 13000, '001', 'The Hero 5 Black can take 12-megapixel stills, while the Hero 5 Session can do 10-megapixel stills, though both support auto-upload when the camera charging. They can also capture wide-angle photos and videos, with the Hero 5 Black able to shoot in RAW. Other features shared between the two include a simple one-button control system, electroinc stabilisation during video capture, and a new linear view setting.');
+insert into trainexam.product values('00105', 'FujiXerox DocuPrint CM225 fw', 15000, '001', 'In todays fast paced world, we have access to information everywhere we go. The DocuPrint CM225 fw allows you to print in the office or on the go from mobile devices providing ultimate usability producing vibrant documents with incredible clarity.');
+insert into trainexam.product values('00106', 'Drone DJI Phantom 4 pro Plus', 78000, '001', 'Draw is a brand new technology for waypoint control. Simply draw a route on screen and the Phantom 4 Pro will move in that direction while keeping its altitude locked. This allows the pilot to focus on camera control and enables more complex shots. There are two Draw modes that can be used in diffent scenarios.');
+
+insert into trainexam.product values('00201', 'Dynaimite super mass gainer whey protein', 2000, '002', 'Gaining muscle mass and size can be very challenging, especially when you have a fast metabolism or find it difficult to consume enough calories and protein during the day. Super Mass Gainer is a high-quality mass and size gainer that is loaded with enough protein, BCAAs, calories, and other nutrients to help even the hardest gainers pack on mass and size. Unlike many other mass gainers out there, Super Mass Gainer also tastes delicious and has amazing mixability!');
+insert into trainexam.product values('00202', 'Omron Scan Body Composition Monitor HBF-214', 3600, '002', 'It''s more than just a weighing scale! it shows you if your diet and exercise are effective. Omron Body Composition Monitor HBF-214 shows yours precise body composition measurement of body fat, skeletal muscle, Visceral fat and more in seconds!');
+
+insert into trainexam.product values('00301', 'Adidas Adistar Boost ESM', 3600, '003', 'The Adistar Boost ESM brings Adidas top of line technology into a supportive shoe. So while it may be fairly (read, super) pricey compared to many similar shoes, it offers incredible comfort with boost foam thrown in to take the edge off of the otherwise hard supportive foam.');
+insert into trainexam.product values('00302', 'Telescopic Carbon Spinning Fishing Rod 1.8M 6 Section', 800, '003', 'This fishing rod is made from carbon fiber, strong and durable. With the features of nice flexibility and strong heavy capacity. Telescopic length fishing rod for situations where full-size fishing gear is inconvenient.Portable closed length design for conveniently carrying around.');
+
+insert into trainexam.product values('00401', 'Samsung Refrigerator RF56K9040SG', 99990, '004', 'A Triple Cooling System independently controls and optimises the temperature, maximises humidity and prevents odors mixing in 3 compartment. A Metal Cooling plate also helps to keep the air cool for longer.');
+insert into trainexam.product values('00402', 'Mitsubishi Electric Air Inverter 18000 BTU MSY-GM18VA', 30000, '004', 'A wide variety of indoor unit designs and outdoor unit capacities ensures the flexibility to meet the most challenging of air conditioning needs. Many systems are equipped with the "Move-eye sensor", an original Mitsubishi Electric technology that realizes better air conditioning control. This is combined with other industry-leading energy-saving and silencing technologies to produce air conditioners that provide optimum performance and room comfort wherever they are installed.');
+
+-- Customer Data
+insert into trainexam.customer values('00001', 'Hugh', 'Jackman', 'The Spanky Taylor Company 3727 W. Magnolia Suite 300 Burbank, CA 91505 USA');
+insert into trainexam.customer values('00002', 'Jennifer', 'Lawrence', 'ID Public Relations 7060 Hollywood Blvd 8th Floor Los Angeles, CA 90028 USA');
+insert into trainexam.customer values('00003', 'Matt', 'Damon', 'Viewpoint, Inc. 8820 Wilshire Blvd Suite 220 Beverly Hills, CA 90211-2618 USA');
+
+-- order_master Data
+insert into trainexam.order_master values ('00001', '00001', CURRENT_TIMESTAMP(), 63000, 3);
+
+-- order_detail Data
+insert into trainexam.order_detail values ('00001', '00001', '00103', 5, 1000);
+insert into trainexam.order_detail values ('00002', '00001', '00102', 1, 50000);
+insert into trainexam.order_detail values ('00003', '00001', '00101', 1, 12000);
+
+
+
+
+
